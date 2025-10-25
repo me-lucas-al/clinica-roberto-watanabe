@@ -1,0 +1,49 @@
+.sobre {
+  background-color: #f5f1e6;
+  color: #243b2a; 
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 48px 64px;
+}
+
+.paragrafo{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+/* TÍTULO */
+.titulo {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #24442e; 
+}
+
+/* PARÁGRAFOS */
+.texto {
+  text-align: center;
+  font-size: 1.1rem;
+  text-align: justify;
+  max-width: 1000px;
+}
+
+/* RESPONSIVO */
+/* @media (max-width: 768px) {
+  .sobre {
+    padding: 60px 8%;
+  }
+
+  .titulo {
+    font-size: 1.6rem;
+  }
+
+  .texto {
+    font-size: 1rem;
+    line-height: 1.7;
+  } 
+}*/

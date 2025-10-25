@@ -1,0 +1,63 @@
+.header {
+  width: 100%;
+  height: 80vh;
+  background: linear-gradient(90deg, #009b3a 0%, #1e402d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 80px;
+}
+
+/* CONTAINER PRINCIPAL */
+.containerHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #fff;
+}
+
+/* LOGO GRANDE */
+.logoHeader {
+  width: 200px;
+  height: 200px;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3));
+}
+
+/* TÍTULO */
+.titleHeader {
+  font-family: "Poppins", sans-serif;
+  font-size: 2.6rem;
+  font-weight: 600;
+  color: #dfe6e9;
+}
+
+/* SUBTÍTULO */
+.subtitleHeader {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  color: #d9b43a;
+}
+
+/* RESPONSIVO */
+/* @media (max-width: 768px) {
+    .header {
+    height: 60vh;
+  }
+
+  .logoHeader {
+    width: 110px;
+    height: 110px;
+  }
+
+  .titleHeader {
+    font-size: 1.8rem;
+  }
+
+  .subtitleHeader {
+    font-size: 1rem;
+  }
+} */
