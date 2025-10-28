@@ -1,25 +1,21 @@
-import Navbar from './Components/NavBar';
-import Header from './Components/Header';
-import FAQ from './Components/FAQ';
-import Contato from './Components/Contato';
-import Footer from './Components/Footer';
-import Sobre from './Components/Sobre';
-import Terapias from './Components/Terapias';
-import ModalAgendamento from './Components/ModalAgendamento';
-import './App.css'
+import Navbar from './components/NavBar'
+import Header from './components/Header'
+import Sobre from './components/Sobre'
+import Terapias from './components/Terapias'
+import FAQ from './components/FAQ'
+import Contato from './components/Contato'
+import Footer from './components/Footer'
 
 export default function App() {
-
   return (
     <>
       <Navbar />
       <Header />
       <Sobre />
       <Terapias />
-      {/* <FAQ /> */}
+      <FAQ />
       <Contato />
       <Footer />
-      {/* <ModalAgendamento /> */}
     </>
   )
 }

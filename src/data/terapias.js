@@ -56,3 +56,4 @@ export const terapias = [
     imagem: './images/img_terapia4.jpg' 
   }
 ];
+

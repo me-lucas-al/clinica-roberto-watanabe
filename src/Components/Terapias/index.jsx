@@ -1,24 +1,57 @@
-import { terapias } from '../../assets/data';
+import { terapias } from '../../data/terapias'
+import { ModalAgendamento } from '../ModalAgendamento/index.jsx'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 
 export default function Terapias() {
-    return(    
-        <section className="bg-[#f8f3e6] py-12 px-16 text-center flex items-center justify-center flex-col gap-8" id="terapias">
-            <h1 className="text-[2.4rem] font-bold text-[#2d472e] m-0">Terapias Oferecidas</h1>
+  return (
+    <section className="py-20 px-5 max-w-6xl mx-auto text-center" id="terapias">
+      <h2 className="text-4xl mb-8 text-tema2 font-semibold">Terapias Oferecidas</h2>
 
-            <div className="max-w-[1200px] flex flex-row flex-wrap items-center justify-center gap-6">
-                {terapias.map((terapia) => (
-                    <div key={terapia.id} className="group w-[280px] h-[230px] rounded-xl bg-cover bg-center text-white shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
-                        <div className="bg-[rgba(0,50,20,0.75)] w-full h-full rounded-xl flex flex-col justify-center items-center transition-colors duration-300 ease-in-out group-hover:bg-[rgba(0,60,25,0.85)]">
-                            <h3 className="text-[1.4rem] m-0">{terapia.titulo}</h3>
-                            <p className="text-base max-w-[80%] text-[#f2f2f2] m-0">{terapia.subtitulo}</p>
-                        </div>
-                    </div>
-                ))}
-            </div>
+      <div className="flex flex-wrap justify-center gap-5 mt-10">
+        {terapias.map((terapia) => (
+          <Dialog key={terapia.id}>
+            <DialogTrigger asChild>
+              <div
+                className="therapy-card hover:cursor-pointer w-[250px] py-16 px-10 rounded-lg text-center transition-transform duration-300 hover:-translate-y-3 text-white"
+                style={{ backgroundImage: `url(${terapia.imagem})` }}
+              >
+                <h3 className="text-2xl mb-3 font-semibold">{terapia.titulo}</h3>
+                <p className="text-sm text-white">{terapia.subtitulo}</p>
+              </div>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-lg bg-fundo">
+              <DialogHeader className="text-center items-center">
+                <img 
+                  id="terapiaImagemModal" 
+                  src={terapia.imagem} 
+                  alt={terapia.titulo} 
+                  className="w-64 h-64 object-cover border-2 border-tema mb-6"
+                />
+                <DialogTitle id="terapiaTitulo" className="text-2xl font-bold mb-4 text-tema2">{terapia.titulo}</DialogTitle>
+                <DialogDescription id="terapiaDescricao" className="text-base text-tema2 leading-relaxed text-left">
+                  {terapia.descricao}
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+        ))}
+      </div>
 
-            <a className="py-[14px] px-8 bg-[#243b2a] text-white rounded-full no-underline shadow-lg transition-all duration-300 ease-in-out hover:bg-[#b3872c] hover:-translate-y-1.5 cursor-pointer">
-                Agende sua consulta
-            </a>
-        </section>
-    );
+      <ModalAgendamento>
+        <button
+          className="mt-16 inline-block px-12 py-5 rounded-full text-white font-bold text-xl bg-tema2 hover:bg-tema2/90 border-2 border-tema hover:bg-tema hover:-translate-y-1 hover:shadow-lg transition-all duration-300 no-underline shadow-md"
+          style={{ textShadow: '1px 1px 4px rgba(0, 0, 0, 0.5)' }}
+        >
+          Agende sua consulta
+        </button>
+      </ModalAgendamento>
+    </section>
+  )
 }

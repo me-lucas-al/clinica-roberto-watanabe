@@ -1,1 +1,66 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@theme {
+  --color-tema: #c49b33;
+  --color-tema2: #2d472e;
+  --color-tema3: #141f14;
+  --color-tema5: #2C4029;
+  --color-fundo: #f9f5e7;
+
+  --color-dark-bg: #000000;
+  --color-dark-secondary: #2C4029;
+  --color-dark-accent: #A67924;
+  --color-dark-light: #EFDDA8;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+body {
+  background-color: var(--color-fundo);
+  color: theme(colors.tema2);
+  font-family: sans-serif;
+  transition-property: color, background-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+[data-theme="dark"] {
+  --color-fundo: #000000;
+  --color-tema2: #EFDDA8;
+  --color-tema3: #2C4029;
+  --color-tema5: #EFDDA8;
+  --color-tema: #A67924;
+}
+
+.therapy-card {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  border: 1px solid #4a7449;
+}
+
+.therapy-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(45, 71, 46, 0.85);
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.therapy-card:hover::before {
+  background: rgba(45, 71, 46, 0.95);
+}
+
+.therapy-card > * {
+  position: relative;
+  z-index: 1;
+}
