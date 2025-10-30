@@ -1,16 +1,35 @@
-# React + Vite
+# 🌿 Clínica Holística Roberto Watanabe
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Site oficial da **Clínica Holística Roberto Watanabe**, localizada em Bragança Paulista (SP), especializada em terapias naturais e integrativas voltadas ao bem-estar físico, emocional e espiritual.
 
-Currently, two official plugins are available:
+## 🧩 Objetivo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este projeto tem como missão não apenas apresentar a clínica ao público, mas também **servir de referência para microempreendedores** que desejam escalar seus negócios utilizando o poder do digital.
 
-## React Compiler
+Através de um site simples, bonito e funcional, mostramos como é possível criar presença online de forma acessível e eficiente.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+- **React**
+- **Tailwind CSS**
+- **JavaScript (JSX)**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🎯 Funcionalidades
+
+- Página institucional com apresentação da clínica
+- Seção com serviços e terapias oferecidas (com modais descritivos)
+- Seção de Perguntas Frequentes (FAQ) com `Accordion`
+- Formulário de Agendamento (Modal)
+- Seção de Contato com links diretos (WhatsApp, Maps, etc.)
+- Layout responsivo (mobile-first)
+- Tema Dark / Light
+
+## 👥 Participantes
+
+Este site foi desenvolvido por:
+
+- **Sammy Zhao** – Líder do projeto e responsável pelo alinhamento do desenvolvimento com as expectativas do cliente
+- **Sanmara Lima** – Design e estrutura de conteúdo
+- **Cassio Ferro** – Organização e coordenação do projeto
+- **Lucas Almeida** – Desenvolvimento front-end
+- **André Ressude** – Desenvolvimento back-end
