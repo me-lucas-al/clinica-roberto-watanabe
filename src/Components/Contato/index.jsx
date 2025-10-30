@@ -7,7 +7,7 @@ import imgMaps from '../../assets/iconMaps.png'
 export default function Contato() {
   return (
     <section
-      className="flex flex-col bg-gradient-to-r from-green-600 via-tema2 to-green-900 text-white px-6 py-10"
+      className="flex flex-col header-gradient text-white px-6 py-10"
       id="contato"
     >
       <div className="text-center mb-10">

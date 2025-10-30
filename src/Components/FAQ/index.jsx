@@ -19,7 +19,7 @@ export default function FAQ() {
           <AccordionItem
             key={item.id}
             value={item.id}
-            className="border border-tema rounded-lg p-5 bg-tema2 hover:bg-tema2/90 transition-all duration-300 text-white data-[state=open]:bg-tema2/90"
+            className="border border-tema rounded-lg p-5 bg-tema3 hover:bg-tema3/90 transition-all duration-300 text-white data-[state=open]:bg-tema3/90"
           >
             <AccordionTrigger className="text-left cursor-pointer font-semibold text-base sm:text-lg data-[state=open]:text-tema transition-colors py-0 hover:no-underline">
               {item.pergunta}
