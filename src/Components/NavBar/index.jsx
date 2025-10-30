@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components//ui/sheet'
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet'
 import { ModalAgendamento } from '../ModalAgendamento/index.jsx'
 import { ThemeToggle } from '../Theme/index.jsx'
 import logo from '../../assets/logo.png'
@@ -11,7 +11,7 @@ export default function Navbar() {
   const NavLink = ({ href, children }) => (
     <a
       href={href}
-      className="text-white hover:text-tema font-medium transition-colors duration-300 relative group"
+      className="text-white hover:text-tema font-bold transition-colors duration-300 relative group"
     >
       {children}
       <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-tema transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
@@ -30,7 +30,7 @@ export default function Navbar() {
   )
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-tema2/95 backdrop-blur-md border-b border-tema/20">
+    <nav className="fixed top-0 left-0 right-0 z-50 header-gradient backdrop-blur-md border-b border-tema/20">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-3">
@@ -46,7 +46,7 @@ export default function Navbar() {
             <NavLink href="#contato">Contato</NavLink>
             <ThemeToggle />
             <ModalAgendamento>
-              <button className="bg-tema hover:bg-tema/80 text-white px-6 py-2 rounded-full font-semibold transition-all duration-300 hover:scale-105">
+              <button className="bg-tema cursor-pointer hover:bg-tema/80 text-white px-6 py-2 rounded-full font-semibold transition-all duration-300 hover:scale-105">
                 Agendar
               </button>
             </ModalAgendamento>
