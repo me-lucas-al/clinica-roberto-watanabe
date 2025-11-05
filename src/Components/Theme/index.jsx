@@ -1,5 +1,6 @@
 import { MoonIcon, SunIcon } from '@phosphor-icons/react'
 import { useTheme } from '../../context/theme-context.jsx'
+import styles from './theme.module.css'
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
@@ -11,13 +12,20 @@ export function ThemeToggle() {
   return (
     <div
       onClick={toggleTheme}
-      className="relative w-15 h-7.5 bg-gray-300 dark:bg-tema rounded-full cursor-pointer transition-all duration-300 border-2 border-gray-300 dark:border-tema"
+      className={`${styles.toggleContainer} ${
+        theme === 'dark' ? styles.dark : ''
+      }`}
     >
-      {theme === 'light' ? (
-        <SunIcon className="absolute top-1/2 left-1.5 -translate-y-1/2 w-4 h-4 text-white dark:opacity-30 transition-opacity duration-300" />
-      ) : (
-        <MoonIcon className="absolute top-1/2 right-1.5 -translate-y-1/2 w-4 h-4 text-white opacity-30 dark:opacity-100 transition-opacity duration-300" />
-      )}
+      <SunIcon
+        className={`${styles.icon} ${styles.sun} ${
+          theme === 'light' ? styles.visible : ''
+        }`}
+      />
+      <MoonIcon
+        className={`${styles.icon} ${styles.moon} ${
+          theme === 'dark' ? styles.visible : ''
+        }`}
+      />
     </div>
   )
 }

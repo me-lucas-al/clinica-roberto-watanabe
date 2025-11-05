@@ -1,15 +1,17 @@
 import imgLogo from '../../assets/logo.png'
+import styles from './header.module.css'
 
 export default function Header() {
   return (
-    <header
-      className="header-gradient h-[500px] flex flex-col justify-center items-center text-center relative overflow-hidden pt-16"
-      id="header"
-    >
-      <div className="relative z-2">
-        <img src={imgLogo} alt="Logomarca da clínica" className="w-[200px] h-[200px] mb-[10px] mx-auto" />
-        <h1 className="text-gray-300 text-4xl mb-2 font-semibold md:text-4xl">Roberto Watanabe</h1>
-        <p className="text-tema text-2xl mb-10 uppercase tracking-[2px]">Clínica Holística</p>
+    <header className={`${styles.header} header-gradient`} id="header">
+      <div className={styles.content}>
+        <img
+          src={imgLogo}
+          alt="Logomarca da clínica"
+          className={styles.logo}
+        />
+        <h1 className={styles.title}>Roberto Watanabe</h1>
+        <p className={styles.subtitle}>Clínica Holística</p>
       </div>
     </header>
   )
