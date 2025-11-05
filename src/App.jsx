@@ -1,10 +1,10 @@
-import Navbar from './Components/NavBar/index'
-import Header from './Components/Header/index'
-import Sobre from './Components/Sobre/index'
-import Terapias from './Components/Terapias/index'
-import FAQ from './Components/FAQ/index'
-import Contato from './Components/Contato/index'
-import Footer from './Components/Footer/index'
+import Navbar from './components/NavBar/index'
+import Header from './components/Header/index'
+import Sobre from './components/Sobre/index'
+import Terapias from './components/Terapias/index'
+import FAQ from './components/FAQ/index'
+import Contato from './components/Contato/index'
+import Footer from './components/Footer/index'
 
 export default function App() {
   return (
