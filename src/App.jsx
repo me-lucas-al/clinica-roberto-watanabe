@@ -5,6 +5,7 @@ import Terapias from './components/Terapias'
 import FAQ from './components/FAQ'
 import Contato from './components/Contato'
 import Footer from './components/Footer'
+import AgendamentoModal from './components/ModalAgendamento'
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
       <FAQ />
       <Contato />
       <Footer />
+      <AgendamentoModal />
     </>
   )
 }
