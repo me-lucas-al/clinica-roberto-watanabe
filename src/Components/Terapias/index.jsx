@@ -24,8 +24,8 @@ export default function Terapias() {
         {terapias.map((terapia) => (
           <div
             key={terapia.id}
+           style={{ background: `linear-gradient(to bottom, rgba(45, 71, 46, 0.8), rgba(45, 71, 46, 0.8)), url(${terapia.imagem}) center center / cover no-repeat`,}}
             className={`${styles.card} therapy-card`}
-            style={{ backgroundImage: `url(${terapia.imagem})` }}
             onClick={() => openTerapiaModal(terapia)}
           >
             <h3 className={styles.cardTitle}>{terapia.titulo}</h3>
