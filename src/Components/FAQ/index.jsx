@@ -1,35 +1,42 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion'
-
+import React, { useState } from 'react'
 import { faqData } from '../../data/faq'
+import styles from './faq.module.css'
+import { ChevronDown } from 'lucide-react'
 
 export default function FAQ() {
-  return (
-    <section id="questions" className="py-20 px-5 sm:px-10 max-w-5xl mx-auto">
-      <h2 className="text-3xl sm:text-4xl mb-10 text-tema2 font-semibold text-center">
-        Perguntas Frequentes
-      </h2>
+  const [openItem, setOpenItem] = useState(null)
 
-      <Accordion type="single" collapsible className="w-full space-y-5">
-        {faqData.map((item) => (
-          <AccordionItem
-            key={item.id}
-            value={item.id}
-            className="border border-tema rounded-lg p-5 bg-tema3 hover:bg-tema3/90 transition-all duration-300 text-white data-[state=open]:bg-tema3/90"
-          >
-            <AccordionTrigger className="text-left cursor-pointer font-semibold text-base sm:text-lg data-[state=open]:text-tema transition-colors py-0 hover:no-underline">
-              {item.pergunta}
-            </AccordionTrigger>
-            <AccordionContent className="mt-3 text-white text-sm sm:text-base leading-relaxed">
-              {item.resposta}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+  const toggleItem = (id) => {
+    setOpenItem(openItem === id ? null : id)
+  }
+
+  return (
+    <section id="questions" className={styles.faqSection}>
+      <h2 className={styles.title}>Perguntas Frequentes</h2>
+      <div className={styles.accordion}>
+        {faqData.map((item) => {
+          const isOpen = openItem === item.id
+          return (
+            <div
+              key={item.id}
+              className={`${styles.accordionItem} ${isOpen ? styles.open : ''}`}
+            >
+              <button
+                className={styles.accordionTrigger}
+                onClick={() => toggleItem(item.id)}
+              >
+                <span className={styles.triggerText}>{item.pergunta}</span>
+                <ChevronDown className={styles.chevron} />
+              </button>
+              {isOpen && (
+                <div className={styles.accordionContent}>
+                  <p>{item.resposta}</p>
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
     </section>
   )
 }

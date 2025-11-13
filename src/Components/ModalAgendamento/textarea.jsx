@@ -1,29 +1,25 @@
-import { Label } from "../ui/label";
-import { Textarea } from "../ui/textarea";
+import React from 'react'
+import styles from './agendamento-modal.module.css'
 
 export default function ModalTextarea() {
   return (
     <>
-      <div className="gap-3">
-        <Label htmlFor="queixa" className="mb-2 font-semibold">
+      <div className={styles.formGroup}>
+        <label htmlFor="queixa" className={styles.label}>
           Queixa
-        </Label>
-        <Textarea
-          className="border border-tema5 text-tema5"
-          id="queixa"
-          name="queixa"
-        />
+        </label>
+        <textarea className={styles.textarea} id="queixa" name="queixa" />
       </div>
-      <div className="gap-3">
-        <Label className="mb-2 font-semibold" htmlFor="informacao">
+      <div className={styles.formGroup}>
+        <label className={styles.label} htmlFor="informacao">
           Alguma Informação Adicional
-        </Label>
-        <Textarea
-          className="border border-tema5 text-tema5"
+        </label>
+        <textarea
+          className={styles.textarea}
           id="informacao"
           name="informacao"
         />
       </div>
     </>
-  );
+  )
 }

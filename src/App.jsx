@@ -1,10 +1,11 @@
-import Navbar from './components/NavBar/index'
-import Header from './components/Header/index'
-import Sobre from './components/Sobre/index'
-import Terapias from './components/Terapias/index'
-import FAQ from './components/FAQ/index'
-import Contato from './components/Contato/index'
-import Footer from './components/Footer/index'
+import Navbar from './components/NavBar'
+import Header from './components/Header'
+import Sobre from './components/Sobre'
+import Terapias from './components/Terapias'
+import FAQ from './components/FAQ'
+import Contato from './components/Contato'
+import Footer from './components/Footer'
+import AgendamentoModal from './components/ModalAgendamento'
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
       <FAQ />
       <Contato />
       <Footer />
+      <AgendamentoModal />
     </>
   )
 }

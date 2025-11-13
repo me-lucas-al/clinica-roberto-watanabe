@@ -1,32 +1,21 @@
-@import 'tailwindcss';
-
-@theme {
-  --color-tema: #c49b33;
-  --color-tema2: #2d472e;
-  --color-tema3: #141f14;
-  --color-tema5: #2C4029;
-  --color-fundo: #f9f5e7;
-
-  --color-dark-bg: #000000;
-  --color-dark-secondary: #2C4029;
-  --color-dark-accent: #A67924;
-  --color-dark-light: #EFDDA8;
-
-  --animate-float: float 3s ease-in-out infinite;
-}
-
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 :root {
   --color-fundo: #f9f5e7;
+  --color-fundo-accent: #f0ead8;
   --color-tema2: #2d472e;
   --color-tema3: #141f14;
-  --color-tema5: #2C4029;
+  --color-tema5: #2c4029;
   --color-tema: #c49b33;
-  
+
   --gradient-start: #16a34a;
   --gradient-mid: #2d472e;
   --gradient-end: #14532d;
@@ -34,14 +23,21 @@
 
 .dark {
   --color-fundo: #000000;
-  --color-tema2: #A67924;
-  --color-tema3: #2C4029;
-  --color-tema5: #EFDDA8;
-  --color-tema: #A67924;
-  
+  --color-fundo-accent: #111111;
+  --color-tema2: #a67924;
+  --color-tema3: #2c4029;
+  --color-tema5: #efdda8;
+  --color-tema: #a67924;
+
   --gradient-start: #2d472e;
   --gradient-mid: #1a2e1a;
   --gradient-end: #0f1f0f;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -49,38 +45,25 @@ body {
   color: var(--color-tema2);
   font-family: sans-serif;
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1),
-              background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   min-height: 100vh;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .header-gradient {
-  background: linear-gradient(to right, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+  background: linear-gradient(
+    to right,
+    var(--gradient-start),
+    var(--gradient-mid),
+    var(--gradient-end)
+  );
   transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.therapy-card {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
-  border: 1px solid #4a7449;
-}
-
-.therapy-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(45, 71, 46, 0.85);
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-}
-
-.therapy-card:hover::before {
-  background: rgba(45, 71, 46, 0.95);
-}
-
-.therapy-card > * {
-  position: relative;
-  z-index: 1;
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }

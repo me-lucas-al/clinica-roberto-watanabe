@@ -1,57 +1,66 @@
+import { useState } from 'react'
 import { terapias } from '../../data/terapias'
-import { ModalAgendamento } from '../ModalAgendamento/index.jsx'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogTrigger,
-} from '@/components/ui/dialog'
+import { useModal } from '../../context/modal-context.jsx'
+import styles from './terapias.module.css'
+import { X } from 'lucide-react'
 
 export default function Terapias() {
-  return (
-    <section className="py-20 px-5 max-w-6xl mx-auto text-center" id="terapias">
-      <h2 className="text-4xl mb-8 text-tema2 font-semibold">Terapias Oferecidas</h2>
+  const { openModal } = useModal()
+  const [selectedTerapia, setSelectedTerapia] = useState(null)
 
-      <div className="flex flex-wrap justify-center gap-5 mt-10">
+  const openTerapiaModal = (terapia) => {
+    setSelectedTerapia(terapia)
+  }
+
+  const closeTerapiaModal = () => {
+    setSelectedTerapia(null)
+  }
+
+  return (
+    <section className={styles.terapiasSection} id="terapias">
+      <h2 className={styles.title}>Terapias Oferecidas</h2>
+
+      <div className={styles.grid}>
         {terapias.map((terapia) => (
-          <Dialog key={terapia.id}>
-            <DialogTrigger asChild>
-              <div
-                className="therapy-card hover:cursor-pointer w-[250px] py-16 px-10 rounded-lg text-center transition-transform duration-300 hover:-translate-y-3 text-white"
-                style={{ backgroundImage: `url(${terapia.imagem})` }}
-              >
-                <h3 className="text-2xl mb-3 font-semibold">{terapia.titulo}</h3>
-                <p className="text-sm text-white">{terapia.subtitulo}</p>
-              </div>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-lg bg-fundo">
-              <DialogHeader className="text-center items-center">
-                <img 
-                  id="terapiaImagemModal" 
-                  src={terapia.imagem} 
-                  alt={terapia.titulo} 
-                  className="w-64 h-64 object-cover border-2 border-tema mb-6"
-                />
-                <DialogTitle id="terapiaTitulo" className="text-2xl font-bold mb-4 text-tema2">{terapia.titulo}</DialogTitle>
-                <DialogDescription id="terapiaDescricao" className="text-base text-tema2 leading-relaxed text-left">
-                  {terapia.descricao}
-                </DialogDescription>
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
+          <div
+            key={terapia.id}
+           style={{ background: `linear-gradient(to bottom, rgba(45, 71, 46, 0.8), rgba(45, 71, 46, 0.8)), url(${terapia.imagem}) center center / cover no-repeat`,}}
+            className={`${styles.card} therapy-card`}
+            onClick={() => openTerapiaModal(terapia)}
+          >
+            <h3 className={styles.cardTitle}>{terapia.titulo}</h3>
+            <p className={styles.cardSubtitle}>{terapia.subtitulo}</p>
+          </div>
         ))}
       </div>
 
-      <ModalAgendamento>
-        <button
-          className="mt-16 inline-block px-12 py-5 rounded-full text-white font-bold text-xl bg-tema2 hover:bg-tema2/90 border-2 border-tema hover:bg-tema hover:-translate-y-1 hover:shadow-lg transition-all duration-300 no-underline shadow-md"
-          style={{ textShadow: '1px 1px 4px rgba(0, 0, 0, 0.5)' }}
-        >
-          Agende sua consulta
-        </button>
-      </ModalAgendamento>
+      <button onClick={openModal} className={styles.agendaButton}>
+        Agende sua consulta
+      </button>
+
+      {selectedTerapia && (
+        <div className={styles.modalOverlay} onClick={closeTerapiaModal}>
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button className={styles.closeButton} onClick={closeTerapiaModal}>
+              <X size={24} />
+            </button>
+            <div className={styles.modalHeader}>
+              <img
+                src={selectedTerapia.imagem}
+                alt={selectedTerapia.titulo}
+                className={styles.modalImage}
+              />
+              <h3 className={styles.modalTitle}>{selectedTerapia.titulo}</h3>
+              <p className={styles.modalDescription}>
+                {selectedTerapia.descricao}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
