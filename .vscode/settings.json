@@ -1,0 +1,10 @@
+{
+  "python.defaultInterpreterPath": "C:\\Lucas\\Clinica Roberto Watanabe\\backend\\venv\\Scripts\\python.exe",
+  "python.analysis.extraPaths": [
+    "C:\\Lucas\\Clinica Roberto Watanabe\\backend\\venv\\Lib\\site-packages"
+  ],
+  "python.analysis.typeCheckingMode": "off",
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.autoImportCompletions": true,
+  "python.languageServer": "Pylance"
+}
