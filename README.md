@@ -11,7 +11,7 @@ Através de um site simples, bonito e funcional, mostramos como é possível cri
 ## 🚀 Tecnologias Utilizadas
 
 - **React**
-- **Tailwind CSS**
+- **CSS Style Modules**
 - **JavaScript (JSX)**
 - **Vite** (como bundler)
 
