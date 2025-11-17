@@ -13,6 +13,29 @@ Através de um site simples, bonito e funcional, mostramos como é possível cri
 - **React**
 - **Tailwind CSS**
 - **JavaScript (JSX)**
+- **Vite** (como bundler)
+
+## 🔧 Instalação e Execução (Desenvolvimento)
+
+Para rodar este projeto localmente, siga os passos abaixo:
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone "https://github.com/Clinica-Roberto-Watanabe/Clinica-Roberto-Watanabe"
+    cd clinica-roberto-watanabe
+    ```
+
+2.  **Instale as dependências:**
+    (Requer [Node.js](https://nodejs.org/) instalado)
+    ```bash
+    npm install
+    ```
+
+3.  **Execute o servidor de desenvolvimento:**
+    O site estará disponível em `http://localhost:5173` (ou outra porta indicada pelo Vite).
+    ```bash
+    npm run dev
+    ```
 
 ## 🎯 Funcionalidades
 
