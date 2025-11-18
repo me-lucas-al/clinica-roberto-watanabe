@@ -1,23 +1,16 @@
-import Navbar from './components/NavBar'
-import Header from './components/Header'
-import Sobre from './components/Sobre'
-import Terapias from './components/Terapias'
-import FAQ from './components/FAQ'
-import Contato from './components/Contato'
-import Footer from './components/Footer'
-import AgendamentoModal from './components/ModalAgendamento'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home"
+import Login from "./pages/Login";
 
-export default function App() {
+function App() {
   return (
-    <>
-      <Navbar />
-      <Header />
-      <Sobre />
-      <Terapias />
-      <FAQ />
-      <Contato />
-      <Footer />
-      <AgendamentoModal />
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
+
+export default App;
