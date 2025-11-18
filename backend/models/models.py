@@ -1,69 +1,103 @@
-from app.extensions import db
+from sqlalchemy import create_engine, Column, Integer, String, Date, ForeignKey
+from sqlalchemy.orm import sessionmaker, declarative_base, relationship
 
-class Usuario(db.Model):
+db = create_engine("mysql+pymysql://root:iTOUOjcOTdYTFDAdpAbHmMooJsbHxoJK@turntable.proxy.rlwy.net:45894/railway")
+Session = sessionmaker(bind=db)
+session = Session()
+
+Base = declarative_base()
+class Usuario(Base):
     __tablename__ = "usuario"
 
-    idUsuario = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    nomeCompleto = db.Column(db.String(150), nullable=False)
-    dataNasc = db.Column(db.Date)
-    senha = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(150), unique=True, nullable=False)
-    telefone = db.Column(db.String(20))
-    tipoUsuario = db.Column(db.String(30), nullable=False)
+    idUsuario = Column(Integer, primary_key=True, autoincrement=True)
+    nomeCompleto = Column(String(150), nullable=False)
+    dataNasc = Column(Date)
+    senha = Column(String(50), nullable=False)
+    email = Column(String(150), unique=True, nullable=False)
+    telefone = Column(String(20))
+    tipoUsuario = Column(String(30), nullable=False)
 
-    historicos = db.relationship(
+    def __init__(self, nomeCompleto, dataNasc, senha, email, telefone, tipoUsuario):
+        self.nomeCompleto = nomeCompleto
+        self.dataNasc = dataNasc
+        self.senha = senha
+        self.email = email
+        self.telefone = telefone
+        self.tipoUsuario = tipoUsuario
+
+    historicos = relationship(
         "HistoricoPaciente",
         backref="usuario",
         cascade="all, delete-orphan"
     )
 
-    agendamentos = db.relationship(
+    agendamentos = relationship(
         "Agendamento",
         backref="usuario",
         cascade="all, delete-orphan"
     )
 
 
-class Terapia(db.Model):
+
+
+class Terapia(Base):
     __tablename__ = "terapia"
 
-    idTerapia = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    nomeTerapia = db.Column(db.String(100), nullable=False)
-    descricao = db.Column(db.String(500))
+    idTerapia = Column(Integer, primary_key=True, autoincrement=True)
+    nomeTerapia = Column(String(100), nullable=False)
+    descricao = Column(String(500))
 
-    agendamentos = db.relationship("Agendamento", backref="terapia")
+    def __init__(self, nomeTerapia, descricao):
+        self.nomeTerapia = nomeTerapia
+        self.descricao = descricao
+
+    agendamentos = relationship("Agendamento", backref="terapia")
 
 
-class HistoricoPaciente(db.Model):
+class HistoricoPaciente(Base):
     __tablename__ = "historicopaciente"
 
-    idHistorico = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    dataConsulta = db.Column(db.Date, nullable=False)
-    diagnostico = db.Column(db.String(500))
+    idHistorico = Column(Integer, primary_key=True, autoincrement=True)
+    dataConsulta = Column(Date, nullable=False)
+    diagnostico = Column(String(500))
 
-    idUsuario = db.Column(
-        db.Integer,
-        db.ForeignKey("usuario.idUsuario", ondelete="CASCADE", onupdate="CASCADE"),
+    idUsuario = Column(
+        Integer,
+        ForeignKey("usuario.idUsuario", ondelete="CASCADE", onupdate="CASCADE"),
         nullable=False
     )
 
+    def __init__(self, dataConsulta, diagnostico, idUsuario):
+        self.dataConsulta = dataConsulta
+        self.diagnostico = diagnostico
+        self.idUsuario = idUsuario
 
-class Agendamento(db.Model):
+
+class Agendamento(Base):
     __tablename__ = "agendamento"
 
-    idAgendamento = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    dataPreferencial = db.Column(db.Date, nullable=False)
-    queixa = db.Column(db.String(300))
-    info = db.Column(db.String(400))
+    idAgendamento = Column(Integer, primary_key=True, autoincrement=True)
+    dataPreferencial = Column(Date, nullable=False)
+    queixa = Column(String(300))
+    info = Column(String(400))
 
-    idTerapia = db.Column(
-        db.Integer,
-        db.ForeignKey("terapia.idTerapia", onupdate="CASCADE"),
+    idTerapia = Column(
+        Integer,
+        ForeignKey("terapia.idTerapia", onupdate="CASCADE"),
         nullable=False
     )
 
-    idUsuario = db.Column(
-        db.Integer,
-        db.ForeignKey("usuario.idUsuario", onupdate="CASCADE"),
+    idUsuario = Column(
+        Integer,
+        ForeignKey("usuario.idUsuario", onupdate="CASCADE"),
         nullable=False
     )
+
+    def __init__(self, dataPreferencial, queixa, info, idTerapia, idUsuario):
+        self.dataPreferencial = dataPreferencial
+        self.queixa = queixa
+        self.info = info
+        self.idTerapia = idTerapia
+        self.idUsuario = idUsuario
+
+Base.metadata.create_all(bind=db)
