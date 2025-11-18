@@ -4,8 +4,10 @@ import { useModal } from '../../context/modal-context.jsx'
 import { ThemeToggle } from '../Theme/index.jsx'
 import logo from '../../assets/logo.png'
 import styles from './navbar.module.css'
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { openModal } = useModal()
 
@@ -57,6 +59,13 @@ export default function Navbar() {
             >
               Agendar
             </button>
+             <button
+              onClick={() => navigate("/login")}
+              className={styles.loginButton}
+            >
+              Login
+            </button>
+
           </div>
 
           <div className={styles.mobileNavTrigger}>

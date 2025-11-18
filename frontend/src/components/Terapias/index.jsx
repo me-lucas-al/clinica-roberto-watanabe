@@ -3,22 +3,10 @@ import { terapias } from '../../data/terapias'
 import { useModal } from '../../context/modal-context.jsx'
 import styles from './terapias.module.css'
 import { X } from 'lucide-react'
-import api from '../../api/api.js'
 
 export default function Terapias() {
   const { openModal } = useModal()
   const [selectedTerapia, setSelectedTerapia] = useState(null)
-
-  const fetchData = async () => {
-    try {
-      const response = await api.get('/api/data')
-      console.log(response.data)
-    } catch (error) {
-      console.error('Error fetching data:', error)
-    }
-  }
-
-  console.log(fetchData())
 
   const openTerapiaModal = (terapia) => {
     setSelectedTerapia(terapia)
