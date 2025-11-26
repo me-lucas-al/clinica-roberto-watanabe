@@ -2,7 +2,12 @@ import os
 from sqlalchemy import create_engine, Column, Integer, String, Date, ForeignKey
 from sqlalchemy.orm import sessionmaker, declarative_base, relationship
 
-db = create_engine(os.getenv("DATABASE_URL"))
+url_conexao = os.getenv("MYSQL_PUBLIC_URL") 
+
+if url_conexao.startswith("mysql://"):
+    url_conexao = url_conexao.replace("mysql://", "mysql+pymysql://", 1)
+    
+db = create_engine(url_conexao)
 Session = sessionmaker(bind=db)
 session = Session()
 
