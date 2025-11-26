@@ -1,7 +1,8 @@
+import os
 from sqlalchemy import create_engine, Column, Integer, String, Date, ForeignKey
 from sqlalchemy.orm import sessionmaker, declarative_base, relationship
 
-db = create_engine("mysql+pymysql://root:iTOUOjcOTdYTFDAdpAbHmMooJsbHxoJK@turntable.proxy.rlwy.net:45894/railway")
+db = create_engine(os.getenv("DATABASE_URL"))
 Session = sessionmaker(bind=db)
 session = Session()
 
