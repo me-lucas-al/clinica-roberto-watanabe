@@ -1,8 +1,7 @@
-from backend.models import models
 from flask import Flask, jsonify, request, session
 from flask_cors import CORS
-from backend.models import Usuario
-from backend.models import Agendamento
+from models.models import Usuario
+from models.models import Agendamento
 
 app = Flask(__name__)
 
