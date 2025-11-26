@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from routes.user import user_bp
+from routes.users import user_bp
 from routes.agendamentos import agendamentos_bp
 
 app = Flask(__name__)
