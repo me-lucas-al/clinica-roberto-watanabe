@@ -2,6 +2,8 @@ from flask import Flask
 from flask_cors import CORS
 from routes.users import user_bp
 from routes.agendamentos import agendamentos_bp
+from routes.terapias import terapia_bp
+from routes.historico import historico_bp
 
 app = Flask(__name__)
 
@@ -13,6 +15,8 @@ def api_status():
 
 app.register_blueprint(user_bp)
 app.register_blueprint(agendamentos_bp)
+app.register_blueprint(terapia_bp)
+app.register_blueprint(historico_bp)
 
 if __name__ == '__main__':
     app.run(debug=True)

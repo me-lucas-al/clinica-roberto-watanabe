@@ -17,6 +17,8 @@ dist-ssr
 venv/
 
 # Python virtual environments
+__pycache__/
+*.pyc
 venv/
 .venv/
 
