@@ -41,8 +41,10 @@ def login():
     
     usuario = db_session.query(Usuario).filter_by(email=data['email']).first()
     
-    if not usuario or not check_password_hash(usuario.senha, data['senha']):
-        return jsonify({'success': False, 'message': 'Credenciais inválidas'}), 401
+    if not usuario:
+        return jsonify({'success': False, 'message': 'Usuário não encontrado'}), 401
+    elif not check_password_hash(usuario.senha, data['senha']):
+        return jsonify({'success': False, 'message': 'Senha incorreta'}), 401
     
     return jsonify({
         'success': True,

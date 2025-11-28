@@ -127,7 +127,7 @@ export default function Cadastro() {
             {/* telefone */}
             <div className={styles.formGroup}>
               <label className={styles.label} htmlFor="telefone">
-                Telefone (Opcional)
+                Telefone
               </label>
               <input
                 className={styles.input}

@@ -18,7 +18,7 @@ class Usuario(Base):
     idUsuario = Column(Integer, primary_key=True, autoincrement=True)
     nomeCompleto = Column(String(150), nullable=False)
     dataNasc = Column(Date)
-    senha = Column(String(50), nullable=False)
+    senha = Column(String(300), nullable=False)
     email = Column(String(150), unique=True, nullable=False)
     telefone = Column(String(20))
     tipoUsuario = Column(String(30), nullable=False)
