@@ -5,24 +5,26 @@ import api from '../../api/api.js';
 import styles from './login.module.css';
 import logo from '../../assets/logo.png';
 import { X } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 export default function Login() {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
   
   const onSubmit = async (data) => {
+    console.log('Dados do formulário:', data);
     try {
       const response = await api.post('/api/login', data); 
       
       if (response.status === 200 && response.data.success) {
-        alert('Login realizado com sucesso!');
-        navigate('/dashboard'); 
+        toast.success('Login realizado com sucesso!');
+        setTimeout(() => { navigate("/dashboard"); }, 2000);
       } else {
-        alert(response.data.message || 'Credenciais inválidas.');
+        toast.error('Credenciais inválidas.');
       }
     } catch (error) {
       console.error('Erro no login:', error);
-      alert('Erro ao tentar conectar. Verifique o servidor.');
+      toast.error('Erro ao tentar conectar. Verifique o servidor.');
     }
   };
 

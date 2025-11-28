@@ -2,17 +2,36 @@ import React from 'react'
 import { useModal } from '../../context/modal-context.jsx'
 import SelectTherapy from './select-therapy.jsx'
 import ModalTextarea from './textarea.jsx'
+import { useForm } from 'react-hook-form'
 import DatePicker from './date-picker.jsx'
 import styles from './agendamento-modal.module.css'
+import api from '../../api/api.js'
 import { X } from 'lucide-react'
+import PrimaryInfos from './primary-infos.jsx'
+import { toast } from 'react-toastify'
 
 export default function AgendamentoModal() {
   const { isModalOpen, closeModal } = useModal()
-
+  const { handleSubmit } = useForm()
   if (!isModalOpen) {
     return null
   }
 
+  const onSubmit = async (data) => {
+    try {
+        const response = await api.post('/api/criar-agendamento', data);
+        if (response.status === 201 && response.data.success) {
+          toast.success('Agendamento criado com sucesso!');
+          closeModal();
+        } else {
+          toast.error("Erro ao criar agendamento.");
+          console.error('Resposta inesperada:', response);
+        }
+    } catch (error) {
+      toast.error("Erro ao criar agendamento.");
+      console.error('Erro ao enviar o agendamento:', error);
+    }
+  }
   return (
     <div className={styles.modalOverlay} onClick={closeModal}>
       <div
@@ -22,7 +41,7 @@ export default function AgendamentoModal() {
         <button className={styles.closeButton} onClick={closeModal}>
           <X size={24} />
         </button>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.modalHeader}>
             <h2 className={styles.modalTitle}>Agendar Consulta</h2>
             <p className={styles.modalDescription}>
@@ -30,41 +49,7 @@ export default function AgendamentoModal() {
             </p>
           </div>
           <div className={styles.modalBody}>
-            <div className={styles.formGroup}>
-              <label className={styles.label} htmlFor="name-1">
-                Nome Completo
-              </label>
-              <input
-                className={styles.input}
-                id="name-1"
-                name="name"
-                defaultValue="Seu Nome Completo"
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <label className={styles.label} htmlFor="email">
-                E-mail
-              </label>
-              <input
-                className={styles.input}
-                id="email"
-                name="email"
-                type="email"
-                defaultValue="SeuEmail@exemplo.com"
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <label className={styles.label} htmlFor="phone">
-                Telefone
-              </label>
-              <input
-                className={styles.input}
-                id="phone"
-                name="phone"
-                type="tel"
-                defaultValue="(00) 00000-0000"
-              />
-            </div>
+            <PrimaryInfos />
             <SelectTherapy />
             <DatePicker />
             <ModalTextarea />

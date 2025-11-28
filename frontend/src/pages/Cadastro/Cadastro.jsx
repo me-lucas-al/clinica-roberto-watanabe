@@ -2,9 +2,10 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/api.js";
-import styles from "./cadastro.module.css"; // Novo CSS Module
+import styles from "./cadastro.module.css"; 
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify"
 
 export default function Cadastro() {
   const navigate = useNavigate();
@@ -16,20 +17,21 @@ export default function Cadastro() {
 
   const onSubmit = async (data) => {
     try {
+      console.log('Dados do formulário:', data);
       const response = await api.post("/api/register", data);
-
+      
       if (response.status === 201 && response.data.success) {
-        alert("Usuário cadastrado com sucesso!");
-        navigate("/login");
+        toast.success("Usuário cadastrado com sucesso!");
+        setTimeout(() => { navigate("/login"); }, 2000);
       } else {
-        alert(response.data.message || "Erro ao tentar cadastrar.");
+        toast.error("Erro ao tentar cadastrar.");
       }
     } catch (error) {
       console.error("Erro no cadastro:", error);
       if (error.response && error.response.status === 409) {
-        alert("E-mail já cadastrado. Tente outro e-mail.");
+        toast.error("E-mail já cadastrado. Tente outro e-mail.");
       } else {
-        alert("Erro ao tentar conectar. Verifique o servidor.");
+        toast.error("Erro ao tentar conectar. Verifique o servidor.");
       }
     }
   };
@@ -47,7 +49,6 @@ export default function Cadastro() {
           </div>
 
           <div className={styles.formBody}>
-            {/* nomeCompleto */}
             <div className={styles.formGroup}>
               <label className={styles.label} htmlFor="nomeCompleto">
                 Nome Completo
@@ -67,7 +68,6 @@ export default function Cadastro() {
               )}
             </div>
 
-            {/* email */}
             <div className={styles.formGroup}>
               <label className={styles.label} htmlFor="email">
                 E-mail
@@ -85,7 +85,6 @@ export default function Cadastro() {
               )}
             </div>
 
-            {/* senha */}
             <div className={styles.formGroup}>
               <label className={styles.label} htmlFor="senha">
                 Senha
@@ -106,7 +105,6 @@ export default function Cadastro() {
               )}
             </div>
 
-            {/* dataNasc */}
             <div className={styles.formGroup}>
               <label className={styles.label} htmlFor="dataNasc">
                 Data de Nascimento
