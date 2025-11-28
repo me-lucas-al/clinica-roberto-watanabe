@@ -84,6 +84,7 @@ class Agendamento(Base):
 
     idAgendamento = Column(Integer, primary_key=True, autoincrement=True)
     dataPreferencial = Column(Date, nullable=False)
+    horaAgendamento = Column(String(10), nullable=False)
     queixa = Column(String(300))
     info = Column(String(400))
 
@@ -99,8 +100,9 @@ class Agendamento(Base):
         nullable=False
     )
 
-    def __init__(self, dataPreferencial, queixa, info, idTerapia, idUsuario):
+    def __init__(self, dataPreferencial, horaAgendamento, queixa, info, idTerapia, idUsuario):
         self.dataPreferencial = dataPreferencial
+        self.horaAgendamento = horaAgendamento
         self.queixa = queixa
         self.info = info
         self.idTerapia = idTerapia
