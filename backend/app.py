@@ -1,3 +1,4 @@
+import re
 from flask import Flask
 from flask_cors import CORS
 from routes.users import user_bp
