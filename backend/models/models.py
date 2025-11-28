@@ -84,7 +84,7 @@ class Agendamento(Base):
 
     idAgendamento = Column(Integer, primary_key=True, autoincrement=True)
     dataPreferencial = Column(Date, nullable=False)
-    horaAgendamento = Column(String(10), nullable=False)
+    horaAgendamento = Column(String(20), nullable=False)
     queixa = Column(String(300))
     info = Column(String(400))
 
