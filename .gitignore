@@ -1,3 +1,6 @@
+# Environment
+.env
+
 # Logs
 logs
 *.log
@@ -11,6 +14,7 @@ node_modules
 dist
 dist-ssr
 *.local
+venv/
 
 # Python virtual environments
 venv/
