@@ -1,14 +1,18 @@
-import re
-from flask import Flask
+from flask import Flask, session
 from flask_cors import CORS
 from routes.users import user_bp
 from routes.agendamentos import agendamentos_bp
 from routes.terapias import terapia_bp
 from routes.historico import historico_bp
-
+from models.models import session
+    
 app = Flask(__name__)
 
 CORS(app)
+
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    session.remove()
 
 @app.route('/')
 def api_status():

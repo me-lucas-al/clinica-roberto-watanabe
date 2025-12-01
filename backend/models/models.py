@@ -1,6 +1,6 @@
 import os
-from sqlalchemy import create_engine, Column, Integer, String, Date, ForeignKey
-from sqlalchemy.orm import sessionmaker, declarative_base, relationship
+from sqlalchemy import Text, create_engine, Column, Integer, String, Date, ForeignKey
+from sqlalchemy.orm import sessionmaker, declarative_base, relationship, scoped_session
 
 url_conexao = os.getenv("MYSQL_PUBLIC_URL") 
 
@@ -9,7 +9,7 @@ if url_conexao.startswith("mysql://"):
     
 db = create_engine(url_conexao)
 Session = sessionmaker(bind=db)
-session = Session()
+session = scoped_session(Session)
 
 Base = declarative_base()
 class Usuario(Base):
@@ -51,11 +51,13 @@ class Terapia(Base):
 
     idTerapia = Column(Integer, primary_key=True, autoincrement=True)
     nomeTerapia = Column(String(100), nullable=False)
-    descricao = Column(String(500))
+    descricao = Column(Text)
+    subTitulo = Column(String(300))
 
-    def __init__(self, nomeTerapia, descricao):
+    def __init__(self, nomeTerapia, descricao, subTitulo):
         self.nomeTerapia = nomeTerapia
         self.descricao = descricao
+        self.subTitulo = subTitulo
 
     agendamentos = relationship("Agendamento", backref="terapia")
 
