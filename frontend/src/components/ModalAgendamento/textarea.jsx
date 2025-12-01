@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './agendamento-modal.module.css'
-import { useForm } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 export default function ModalTextarea() {
-  const { register, formState: { errors } } = useForm()
+  const { register, formState: { errors } } = useFormContext()
   return (
     <>
       <div className={styles.formGroup}>
@@ -11,7 +11,7 @@ export default function ModalTextarea() {
           Queixa
         </label>
         <textarea className={styles.textarea} id="queixa" name="queixa"
-        {...register("queixa", { required: "Queixa é obrigatória" })} />
+        {...register("queixa")} />
         
       {errors.queixa && (<p style={{ color: "#ef4444", fontSize: "0.8rem" }}>{errors.queixa.message}</p>)}
       </div>
