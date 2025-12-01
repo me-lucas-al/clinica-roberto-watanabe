@@ -67,7 +67,7 @@ export default function Login() {
                 className={styles.input}
                 id="password"
                 type="password"
-                {...register("password", { required: "Senha é obrigatória" })}
+                {...register("senha", { required: "Senha é obrigatória" })}
               />
               {errors.password && <p style={{ color: '#ef4444', fontSize: '0.8rem' }}>{errors.password.message}</p>}
             </div>
