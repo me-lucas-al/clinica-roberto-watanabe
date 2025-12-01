@@ -1,3 +1,4 @@
+from re import sub
 from flask import Blueprint, jsonify, request
 from models.models import Terapia, session as db_session
 
@@ -7,7 +8,7 @@ terapia_bp = Blueprint('terapia_bp', __name__)
 def criar_terapia():
     data = request.get_json()
 
-    required_fields = ['nomeTerapia', 'descricao']
+    required_fields = ['nomeTerapia']
     for field in required_fields:
         if field not in data:
             return jsonify({'success': False, 'message': f'Campo obrigatório ausente: {field}'}), 400
@@ -15,7 +16,8 @@ def criar_terapia():
     try:
         nova_terapia = Terapia(
             nomeTerapia=data['nomeTerapia'],
-            descricao=data['descricao']
+            descricao=data.get('descricao'),
+            subTitulo=data.get('subTitulo') 
         )
         db_session.add(nova_terapia)
         db_session.commit()
@@ -34,9 +36,10 @@ def get_terapia_por_usuario():
         lista_terapia.append({
             'idTerapia': h.idTerapia,
             'nomeTerapia': h.nomeTerapia,
+            'subTitulo': h.subTitulo,
             'descricao': h.descricao
         })
-    return jsonify({'success': True, 'terapia': lista_terapia}), 200
+    return jsonify({'success': True, 'terapias': lista_terapia}), 200
 
 @terapia_bp.route('/api/terapia/<int:idTerapia>', methods=['GET'])
 def get_terapia_por_id(idTerapia):
