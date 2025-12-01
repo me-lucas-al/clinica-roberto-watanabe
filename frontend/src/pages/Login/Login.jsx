@@ -1,40 +1,45 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { useNavigate, Link } from 'react-router-dom'; 
-import api from '../../api/api.js';
-import styles from './login.module.css';
-import logo from '../../assets/logo.png';
-import { X } from 'lucide-react';
-import { toast } from 'react-toastify';
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate, Link } from "react-router-dom";
+import api from "../../api/api.js";
+import styles from "./login.module.css";
+import logo from "../../assets/logo.png";
+import { toast } from "react-toastify";
+import { useUser } from '../../context/user-context.jsx';
 
 export default function Login() {
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  
+  const { login } = useUser();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
   const onSubmit = async (data) => {
-    console.log('Dados do formulário:', data);
     try {
-      const response = await api.post('/api/login', data); 
-      
+      const response = await api.post("/api/login", data);
+
       if (response.status === 200 && response.data.success) {
-        toast.success('Login realizado com sucesso!');
-        setTimeout(() => { navigate("/dashboard"); }, 2000);
+        console.log(response.data);
+        login(response.data.user);
+        toast.success("Login realizado com sucesso!");
+        reset();
+        navigate("/");
       } else {
-        toast.error('Credenciais inválidas.');
+        toast.error("Credenciais inválidas.");
       }
     } catch (error) {
-      console.error('Erro no login:', error);
-      toast.error('Erro ao tentar conectar. Verifique o servidor.');
+      console.error("Erro no login:", error);
+      toast.error("Erro ao tentar conectar. Verifique o servidor.");
     }
   };
 
   return (
     <div className={`header-gradient ${styles.loginWrapper}`}>
-      
-        <img src={logo} alt="Logo Roberto Watanabe" className={styles.logo} />
+      <img src={logo} alt="Logo Roberto Watanabe" className={styles.logo} />
       <div className={styles.loginBox}>
-
-
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <h2 className={styles.title}>Login</h2>
@@ -42,7 +47,7 @@ export default function Login() {
               Insira suas credenciais para acessar o painel.
             </p>
           </div>
-          
+
           <div className={styles.formBody}>
             {/* Campo E-mail */}
             <div className={styles.formGroup}>
@@ -55,7 +60,11 @@ export default function Login() {
                 type="email"
                 {...register("email", { required: "E-mail é obrigatório" })}
               />
-              {errors.email && <p style={{ color: '#ef4444', fontSize: '0.8rem' }}>{errors.email.message}</p>}
+              {errors.email && (
+                <p style={{ color: "#ef4444", fontSize: "0.8rem" }}>
+                  {errors.email.message}
+                </p>
+              )}
             </div>
 
             {/* Campo Senha */}
@@ -69,32 +78,27 @@ export default function Login() {
                 type="password"
                 {...register("senha", { required: "Senha é obrigatória" })}
               />
-              {errors.password && <p style={{ color: '#ef4444', fontSize: '0.8rem' }}>{errors.password.message}</p>}
+              {errors.password && (
+                <p style={{ color: "#ef4444", fontSize: "0.8rem" }}>
+                  {errors.password.message}
+                </p>
+              )}
             </div>
           </div>
-          
+
           <div className={styles.modalFooter}>
-            <button
-              type="submit"
-              className={`${styles.buttonPrimary}`}
-            >
+            <button type="submit" className={`${styles.buttonPrimary}`}>
               Entrar
             </button>
           </div>
-          
+
           {/* Nova seção de links */}
           <div className={styles.linkWrapper}>
-            <Link
-              to="/cadastro"
-              className={styles.textLink}
-            >
+            <Link to="/cadastro" className={styles.textLink}>
               Não tem uma conta? Cadastre-se
             </Link>
 
-            <a
-              onClick={() => navigate("/")}
-              className={styles.textLink}
-            >
+            <a onClick={() => navigate("/")} className={styles.textLink}>
               Voltar para a página inicial
             </a>
           </div>

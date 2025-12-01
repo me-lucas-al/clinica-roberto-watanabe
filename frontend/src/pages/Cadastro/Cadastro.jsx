@@ -1,35 +1,45 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import api from "../../api/api.js";
 import styles from "./cadastro.module.css"; 
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 
 export default function Cadastro() {
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    reset,
+    watch, 
     formState: { errors },
   } = useForm();
 
+  const senhaDigitada = watch("senha", "");
+
   const onSubmit = async (data) => {
+    const { confirmarSenha: _confirmarSenha, ...dadosLimpos } = data; // _confirmarSenhanão será usada
+
+    const payload = {
+      ...dadosLimpos,
+      tipoUsuario: "cliente"
+    };
+
     try {
-      console.log('Dados do formulário:', data);
-      const response = await api.post("/api/register", data);
+      const response = await api.post("/api/register", payload);
       
       if (response.status === 201 && response.data.success) {
         toast.success("Usuário cadastrado com sucesso!");
-        setTimeout(() => { navigate("/login"); }, 2000);
+        reset();
+        navigate("/login");
       } else {
         toast.error("Erro ao tentar cadastrar.");
       }
     } catch (error) {
       console.error("Erro no cadastro:", error);
       if (error.response && error.response.status === 409) {
-        toast.error("E-mail já cadastrado. Tente outro e-mail.");
+        toast.error("E-mail já cadastrado. Tente outro email.");
       } else {
         toast.error("Erro ao tentar conectar. Verifique o servidor.");
       }
@@ -106,6 +116,27 @@ export default function Cadastro() {
             </div>
 
             <div className={styles.formGroup}>
+              <label className={styles.label} htmlFor="confirmarSenha">
+                Confirmar Senha
+              </label>
+              <input
+                className={styles.input}
+                id="confirmarSenha"
+                type="password"
+                {...register("confirmarSenha", {
+                  required: "Confirmação de senha é obrigatória",
+                  validate: (value) => 
+                    value === senhaDigitada || "As senhas não coincidem",
+                })}
+              />
+              {errors.confirmarSenha && (
+                <p style={{ color: "#ef4444", fontSize: "0.8rem" }}>
+                  {errors.confirmarSenha.message}
+                </p>
+              )}
+            </div>
+
+            <div className={styles.formGroup}>
               <label className={styles.label} htmlFor="dataNasc">
                 Data de Nascimento
               </label>
@@ -124,7 +155,6 @@ export default function Cadastro() {
               )}
             </div>
 
-            {/* telefone */}
             <div className={styles.formGroup}>
               <label className={styles.label} htmlFor="telefone">
                 Telefone
@@ -135,30 +165,6 @@ export default function Cadastro() {
                 type="tel"
                 {...register("telefone")}
               />
-            </div>
-
-            {/* tipoUsuario */}
-            <div className={styles.formGroup}>
-              <label className={styles.label} htmlFor="tipoUsuario">
-                Tipo de Usuário
-              </label>
-              <select
-                className={styles.select}
-                id="tipoUsuario"
-                {...register("tipoUsuario", {
-                  required: "Tipo de usuário é obrigatório",
-                })}
-              >
-                <option value="">Selecione...</option>
-                <option value="cliente">Cliente</option>
-                <option value="admin">Administrador</option>
-                <option value="terapeuta">Terapeuta</option>
-              </select>
-              {errors.tipoUsuario && (
-                <p style={{ color: "#ef4444", fontSize: "0.8rem" }}>
-                  {errors.tipoUsuario.message}
-                </p>
-              )}
             </div>
           </div>
 
