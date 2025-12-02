@@ -127,7 +127,7 @@ Abaixo estão listadas as rotas disponíveis no Back-end.
 | :--- | :--- | :--- |
 | `POST` | `/api/criar-terapia` | Cria uma nova terapia no catálogo. |
 | `GET` | `/api/terapias` | Lista todas as terapias disponíveis. |
-| `GET` | `/api/terapia/<terapia_id>` | Retorna detalhes de uma terapia específica. |
+| `GET` | `/api/terapia/<idTerapia>` | Retorna detalhes de uma terapia específica. |
 
 ### 📝 Histórico do Paciente (`/routes/historico.py`)
 
@@ -152,5 +152,5 @@ Abaixo estão listadas as rotas disponíveis no Back-end.
 
 ## 👥 Scripts Úteis (Backend)
 
-Na pasta `backend`, foram criados scripts auxiliares para manutenção do banco de dados (exigem configuração de conexão):
-  - `seed.py`: Popula o banco de dados com as terapias iniciais.
+Na pasta `models`, foram criados scripts auxiliares para manutenção do banco de dados (exigem configuração de conexão):
+  - `seed_terapias.py`: Popula o banco de dados com as terapias iniciais.

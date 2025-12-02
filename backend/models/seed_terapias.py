@@ -1,6 +1,5 @@
 import requests
 
-# URL da sua API (ajuste se estiver rodando em outra porta ou no Railway)
 BASE_URL = "http://localhost:5000/api/criar-terapia"
 
 terapias = [
