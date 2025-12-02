@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../components/NavBar";
 import Header from "../components/Header";
 import Sobre from "../components/Sobre";
 import Terapias from "../components/Terapias";
