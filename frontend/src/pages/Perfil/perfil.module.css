@@ -6,7 +6,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 80px;
+  padding-top: 100px;
+  padding-bottom: 40px;
 }
 
 .perfilBox {
@@ -14,12 +15,26 @@
   color: var(--color-tema2);
   border-radius: 16px; 
   padding: 40px 32px;
-  max-width: 500px;
+  max-width: 600px; /* Aumentado ligeiramente para caber as listas */
   width: 90%;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   text-align: center;
   border: 1px solid rgba(196, 155, 51, 0.3);
   font-family: 'Poppins', sans-serif;
+  max-height: 90vh; /* Para permitir scroll se a lista for longa */
+  overflow-y: auto;
+}
+
+/* Scrollbar personalizada para o box */
+.perfilBox::-webkit-scrollbar {
+  width: 8px;
+}
+.perfilBox::-webkit-scrollbar-track {
+  background: transparent;
+}
+.perfilBox::-webkit-scrollbar-thumb {
+  background-color: var(--color-tema5);
+  border-radius: 4px;
 }
 
 .avatar {
@@ -47,14 +62,8 @@
 
 .infoGroup {
   text-align: left;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   padding: 0 12px;
-  border-bottom: 1px solid rgba(0,0,0,0.05); 
-  padding-bottom: 12px;
-}
-
-.infoGroup:last-of-type {
-  border-bottom: none;
 }
 
 .label {
@@ -74,8 +83,91 @@
   color: var(--color-tema2);
 }
 
+/* Novos Estilos para Agendamentos e Histórico */
+
+.sectionDivider {
+  height: 1px;
+  background-color: rgba(196, 155, 51, 0.2);
+  margin: 30px 0 20px;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-tema);
+  margin-bottom: 16px;
+  text-align: left;
+  padding-left: 12px;
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.card {
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: left;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.cardRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.cardRowColumn {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+
+.cardLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-tema2);
+  margin-right: 8px;
+}
+
+.cardValue {
+  font-size: 0.95rem;
+  color: var(--color-tema5);
+  font-weight: 500;
+}
+
+.cardValueSmall {
+  font-size: 0.9rem;
+  color: var(--color-tema5);
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 8px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.emptyMessage {
+  color: var(--color-tema5);
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+/* Botões */
+
+.buttonGroup {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .logoutButton {
-  margin-top: 32px;
   background-color: #ef4444;
   color: white;
   padding: 12px 24px;
@@ -97,7 +189,6 @@
 }
 
 .backButton {
-  margin-top: 16px;
   background: none;
   border: none;
   color: var(--color-tema5);
