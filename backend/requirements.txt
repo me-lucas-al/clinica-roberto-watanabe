@@ -3,3 +3,5 @@ Flask-CORS
 SQLAlchemy
 PyMySQL
 cryptography
+gunicorn
+python-dotenv
