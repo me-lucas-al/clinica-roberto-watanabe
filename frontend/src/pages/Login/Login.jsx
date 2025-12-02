@@ -5,7 +5,7 @@ import api from "../../api/api.js";
 import styles from "./login.module.css";
 import logo from "../../assets/logo.png";
 import { toast } from "react-toastify";
-import { useUser } from '../../context/user-context.jsx';
+import { useUser } from "../../context/user-context.jsx";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -27,12 +27,16 @@ export default function Login() {
         toast.success("Login realizado com sucesso!");
         reset();
         navigate("/");
-      } else {
-        toast.error("Credenciais inválidas.");
+      } else if (response.status === 401) {
+        toast.error(response.data.message || "Credenciais inválidas.");
       }
     } catch (error) {
-      console.error("Erro no login:", error);
-      toast.error("Erro ao tentar conectar. Verifique o servidor.");
+      if (error.response) {
+        toast.error(error.response.data.message || "Erro no login.");
+      } else {
+        console.error("Erro no login:", error);
+        toast.error("Erro ao tentar conectar. Verifique o servidor.");
+      }
     }
   };
 
