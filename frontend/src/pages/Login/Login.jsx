@@ -27,8 +27,8 @@ export default function Login() {
         toast.success("Login realizado com sucesso!");
         reset();
         navigate("/");
-      } else {
-        toast.error("Credenciais inválidas.");
+      } else if (response.status === 401) {
+        toast.error(response.data.message || "Credenciais inválidas.");
       }
     } catch (error) {
       console.error("Erro no login:", error);
