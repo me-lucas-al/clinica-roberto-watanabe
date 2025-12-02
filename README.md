@@ -1,58 +1,156 @@
 # 🌿 Clínica Holística Roberto Watanabe
 
-Site oficial da **Clínica Holística Roberto Watanabe**, localizada em Bragança Paulista (SP), especializada em terapias naturais e integrativas voltadas ao bem-estar físico, emocional e espiritual.
-
-## 🧩 Objetivo
-
-Este projeto tem como missão não apenas apresentar a clínica ao público, mas também **servir de referência para microempreendedores** que desejam escalar seus negócios utilizando o poder do digital.
-
-Através de um site simples, bonito e funcional, mostramos como é possível criar presença online de forma acessível e eficiente.
+Site e sistema de gestão para a **Clínica Holística Roberto Watanabe**, localizada em Bragança Paulista. O projeto oferece uma plataforma para apresentação de terapias, agendamento de consultas e gestão de usuários.
 
 ## 🚀 Tecnologias Utilizadas
 
-- **React**
-- **CSS Style Modules**
-- **JavaScript (JSX)**
-- **Vite** (como bundler)
+### Front-end
 
-## 🔧 Instalação e Execução (Desenvolvimento)
+  - **React** (Vite)
+  - **Style Modules (CSS)** (Estilização)
+  - **React Router** (Navegação)
+  - **React Hook Form** (Gerenciamento de formulários)
+  - **Axios** (Requisições HTTP)
+  - **React Toastify** (Notificações)
 
-Para rodar este projeto localmente, siga os passos abaixo:
+### Back-end
 
-1.  **Clone o repositório:**
+  - **Python**
+  - **Flask** (Framework Web)
+  - **SQLAlchemy** (ORM)
+  - **PyMySQL** (Driver de Banco de Dados)
+  - **MySQL** (Banco de Dados - hospedado no Railway)
+
+-----
+
+## 🛠️ Como Rodar o Projeto Localmente
+
+### Pré-requisitos
+
+  - Node.js instalado
+  - Python instalado
+  - Banco de dados MySQL (local ou remoto/Railway)
+
+### 1\. Configurando o Back-end
+
+1.  Navegue até a pasta do servidor:
+
     ```bash
-    git clone "https://github.com/Clinica-Roberto-Watanabe/Clinica-Roberto-Watanabe"
-    cd clinica-roberto-watanabe
+    cd backend
     ```
 
-2.  **Instale as dependências:**
-    (Requer [Node.js](https://nodejs.org/) instalado)
+2.  Crie e ative um ambiente virtual:
+
+    ```bash
+    # Windows
+    python -m venv venv
+    .\venv\Scripts\Activate.ps1
+
+    # Linux/Mac
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
+
+3.  Instale as dependências:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  Configure as variáveis de ambiente:
+
+      - Crie um arquivo `.env` na pasta `backend` ou `backend/models`.
+      - Adicione a string de conexão do banco:
+        ```env
+        MYSQL_PUBLIC_URL="mysql+pymysql://usuario:senha@host:porta/nome_do_banco"
+        ```
+
+5.  Execute o servidor:
+
+    ```bash
+    python app.py
+    ```
+
+    *O servidor rodará em `http://localhost:5000`.*
+
+### 2\. Configurando o Front-end
+
+1.  Navegue até a pasta do cliente (em outro terminal):
+
+    ```bash
+    cd frontend
+    ```
+
+2.  Instale as dependências:
+
     ```bash
     npm install
+    # ou
+    pnpm install
     ```
 
-3.  **Execute o servidor de desenvolvimento:**
-    O site estará disponível em `http://localhost:5173` (ou outra porta indicada pelo Vite).
+3.  Execute o projeto:
+
     ```bash
     npm run dev
+    # ou
+    pnpm dev
     ```
 
-## 🎯 Funcionalidades
+    *O site estará acessível em `http://localhost:5173` (ou porta similar).*
 
-- Página institucional com apresentação da clínica
-- Seção com serviços e terapias oferecidas (com modais descritivos)
-- Seção de Perguntas Frequentes (FAQ) com `Accordion`
-- Formulário de Agendamento (Modal)
-- Seção de Contato com links diretos (WhatsApp, Maps, etc.)
-- Layout responsivo (mobile-first)
-- Tema Dark / Light
+-----
 
-## 👥 Participantes
+## 🔗 Rotas da API (Endpoints)
 
-Este site foi desenvolvido por:
+Abaixo estão listadas as rotas disponíveis no Back-end.
 
-- **Sammy Zhao** – Líder do projeto e responsável pelo alinhamento do desenvolvimento com as expectativas do cliente
-- **Sanmara Lima** – Design e estrutura de conteúdo
-- **Cassio Ferro** – Organização e coordenação do projeto
-- **Lucas Almeida** – Desenvolvimento front-end
-- **André Ressude** – Desenvolvimento back-end
+### 👤 Usuários (`/routes/users.py`)
+
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| `POST` | `/api/register` | Cadastra um novo usuário (Cliente, Terapeuta ou Admin). |
+| `POST` | `/api/login` | Autentica o usuário e retorna os dados de sessão. |
+| `GET` | `/api/user/<user_id>` | Retorna os dados de um usuário específico pelo ID. |
+| `GET` | `/api/users` | Retorna uma lista com todos os usuários cadastrados. |
+
+### 📅 Agendamentos (`/routes/agendamentos.py`)
+
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| `POST` | `/api/criar-agendamento` | Cria um novo agendamento vinculado a um usuário e terapia. |
+| `GET` | `/api/agendamentos/<user_id>` | Retorna o histórico de agendamentos de um usuário específico. |
+
+### ☯️ Terapias (`/routes/terapias.py`)
+
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| `POST` | `/api/criar-terapia` | Cria uma nova terapia no catálogo. |
+| `GET` | `/api/terapias` | Lista todas as terapias disponíveis. |
+| `GET` | `/api/terapia/<idTerapia>` | Retorna detalhes de uma terapia específica. |
+
+### 📝 Histórico do Paciente (`/routes/historico.py`)
+
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| `POST` | `/api/criar-historico` | Registra um histórico clínico/diagnóstico para um paciente. |
+| `GET` | `/api/historico/<user_id>` | Busca o histórico clínico de um usuário específico. |
+
+-----
+
+## 📂 Estrutura de Pastas
+
+  - **backend/**: Contém a API Flask, modelos do banco de dados e rotas.
+      - `models/`: Definição das tabelas (Usuario, Terapia, Agendamento, etc.).
+      - `routes/`: Lógica de cada endpoint separada por contexto.
+  - **frontend/**: Aplicação React.
+      - `src/components/`: Componentes reutilizáveis (Navbar, Modal, Footer).
+      - `src/pages/`: Páginas principais (Home, Login, Cadastro, Perfil).
+      - `src/context/`: Gerenciamento de estado global (UserContext, ModalContext).
+
+-----
+
+## 👥 Scripts Úteis (Backend)
+
+Na pasta `models`, foram criados scripts auxiliares para manutenção do banco de dados (exigem configuração de conexão):
+  - `seed_terapias.py`: Popula o banco de dados com as terapias iniciais.

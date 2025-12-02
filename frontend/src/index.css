@@ -67,3 +67,26 @@ a {
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
+
+.Toastify__toast--success {
+  background-color: #22c55e !important; 
+  color: #ffffff !important;
+}
+
+.Toastify__toast--error {
+  background-color: #ef4444 !important; 
+  color: #ffffff !important;
+}
+
+.Toastify__toast-icon > svg {
+  fill: #ffffff !important;
+}
+
+.Toastify__close-button {
+  color: #ffffff !important;
+  opacity: 0.8;
+}
+
+.Toastify__progress-bar {
+  background: rgba(255, 255, 255, 0.7) !important;
+}

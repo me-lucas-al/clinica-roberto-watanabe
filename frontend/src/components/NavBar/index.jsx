@@ -1,13 +1,17 @@
 import { useState } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, UserRound } from 'lucide-react'
 import { useModal } from '../../context/modal-context.jsx'
+import { useUser } from '../../context/user-context.jsx' 
 import { ThemeToggle } from '../Theme/index.jsx'
 import logo from '../../assets/logo.png'
 import styles from './navbar.module.css'
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { openModal } = useModal()
+  const { user } = useUser() 
 
   const handleOpenAgendaModal = () => {
     openModal()
@@ -57,6 +61,25 @@ export default function Navbar() {
             >
               Agendar
             </button>
+
+            {user ? (
+              <button
+                onClick={() => navigate("/perfil")}
+                className={styles.loginButton} 
+                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+              >
+                <UserRound size={18} />
+                Olá, {user.nomeCompleto.split(' ')[0]}
+              </button>
+            ) : (
+              <button
+                onClick={() => navigate("/login")}
+                className={styles.loginButton}
+              >
+                Login
+              </button>
+            )}
+
           </div>
 
           <div className={styles.mobileNavTrigger}>
@@ -88,12 +111,37 @@ export default function Navbar() {
               <MobileNavLink href="#terapias">Terapias</MobileNavLink>
               <MobileNavLink href="#questions">Perguntas</MobileNavLink>
               <MobileNavLink href="#contato">Contato</MobileNavLink>
+              
               <button
                 onClick={handleMobileMenuAgenda}
                 className={styles.mobileAgendaButton}
               >
                 Agendar Consulta
               </button>
+
+              {user ? (
+                 <button
+                 onClick={() => {
+                   navigate("/perfil")
+                   setIsMobileMenuOpen(false)
+                 }}
+                 className={styles.mobileAgendaButton}
+                 style={{ backgroundColor: 'var(--color-tema2)', marginTop: '8px' }}
+               >
+                 Meu Perfil
+               </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    navigate("/login")
+                    setIsMobileMenuOpen(false)
+                  }}
+                  className={styles.mobileAgendaButton} 
+                  style={{ backgroundColor: 'transparent', border: '1px solid white', marginTop: '8px' }}
+                >
+                  Fazer Login
+                </button>
+              )}
             </nav>
           </div>
         </div>

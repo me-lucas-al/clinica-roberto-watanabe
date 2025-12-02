@@ -1,6 +1,3 @@
-# Environment
-.env
-
 # Logs
 logs
 *.log
@@ -14,13 +11,6 @@ node_modules
 dist
 dist-ssr
 *.local
-venv/
-
-# Python virtual environments
-__pycache__/
-*.pyc
-venv/
-.venv/
 
 # Editor directories and files
 .vscode/*
